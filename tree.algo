@@ -1,0 +1,80 @@
+//Function that gives the number of nodes in the tree
+
+FUNCTION nodes-number(root:^t) : INTEGER
+
+BEGIN
+    IF (root=NULL) THEN
+        RETURN 0;
+    ELSE_IF (root^.VAL<>NULL) THEN
+        RETURN  1+number_of_nodes(root^.LC)+number_of_nodes(root^.RC);
+    END_IF
+END
+
+//Function that gives the height of a tree
+
+FUNCTION height-of-a-tree(root:^t) : INTEGER
+    LS,RS : INTEGER; //left side and right side
+
+BEGIN
+    LS= height-of-a-tree(root^.LC);
+    RS= height-of-a-tree(root^.RC);
+    IF (root=NULL) THEN
+        RETURN 0;
+    ELSE_IF (LS>RS) THEN
+        RETURN LS + 1;  
+    ELSE
+        RETURN RS + 1;
+    
+    END_IF
+END
+
+//Function that gives the number of leaves in the tree
+
+FUNCTION number-of-leaves(root:^t) : INTEGER
+
+BEGIN
+    IF (root= NULL) THEN
+        RETURN 0;
+    ELSE_IF(root^.LC= NULL and root^.RC=NULL) THEN
+        RETURN count++;
+    ELSE_IF (root^.LC<> NULL) THEN
+        RETURN number-of-leaves(root^.LC);
+    ELSE
+        RETURN number-of-leaves(root^.RC);
+    END_IF
+END
+
+
+// Function that gives the maximum value in the tree
+
+FUNCTION maximumValue(root:^t) :INTEGER
+VAR
+    max : INTEGER;
+BEGIN
+    IF (root= NULL) THEN
+        RETURN 0;
+    ELSE_IF (root^.VAL> max) THEN
+        max:=root^.VAL;
+        
+    ELSE 
+        max:=maximumValue(root^.VAL,max);
+    END_IF
+        RETURN max;
+END      
+
+//Function to test if the tree is a full binary tree
+
+FUNCTION is-a-full_binary(root^:t) :BOOLEAN
+BEGIN
+    IF (root= NULL) THEN
+        RETURN TRUE;
+    ELSE_IF (root^.RC=NULL and root^.LC=NULL)
+        RETURN TRUE;
+    ELSE_IF (root^.RC<>NULL and root^.<>NULL) 
+        RETURN is-a-full_binary(root^.RC) and is-a-full_binary(root^.LC)
+    ELSE 
+        RETURN FALSE;   
+    END_IF
+END
+
+    
